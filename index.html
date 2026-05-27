@@ -13,29 +13,24 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     html, body { height: 100%; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif; background: #fff; }
-
-    /* ===== 页面容器 ===== */
     .page { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; display: flex; flex-direction: column; }
     .page.hidden { display: none; }
 
-    /* ===== API设置页 ===== */
     #page-setup { align-items: center; justify-content: center; padding: 32px 24px; }
     #page-setup h1 { font-size: 22px; color: #1F2937; margin-bottom: 8px; }
-    #page-setup p { font-size: 14px; color: #6B7280; margin-bottom: 32px; text-align: center; line-height: 1.6; }
+    #page-setup > p { font-size: 14px; color: #6B7280; margin-bottom: 32px; text-align: center; line-height: 1.6; }
     .input-wrap { position: relative; width: 100%; max-width: 360px; margin-bottom: 16px; }
     .input-wrap input { width: 100%; padding: 14px 48px 14px 16px; border: 2px solid #7C3AED; border-radius: 10px; font-size: 15px; color: #1F2937; outline: none; background: #fff; }
     .input-wrap .toggle-pw { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: #6B7280; font-size: 18px; line-height: 1; padding: 4px; }
     .hint-text { font-size: 12px; color: #9CA3AF; text-align: center; max-width: 360px; line-height: 1.6; }
     .hint-text a { color: #7C3AED; text-decoration: none; }
 
-    /* ===== 主页 ===== */
     #page-home { align-items: center; justify-content: center; }
     .home-icon { width: 80px; height: 80px; background: #7C3AED; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 20px rgba(124,58,237,0.35); transition: transform 0.15s ease; }
     .home-icon:active { transform: scale(0.93); }
     .home-icon span { color: #fff; font-size: 32px; font-weight: bold; }
     .home-label { margin-top: 10px; font-size: 16px; color: #7C3AED; font-weight: 500; }
 
-    /* ===== 选择界面 ===== */
     #page-select { align-items: center; justify-content: center; }
     #page-select h2 { font-size: 16px; color: #374151; margin-bottom: 24px; }
     .btn { display: block; width: 240px; height: 52px; border: none; border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer; transition: opacity 0.15s ease, transform 0.15s ease; text-align: center; line-height: 52px; }
@@ -45,7 +40,6 @@
     .btn-disabled { background: #D1D5DB !important; color: #9CA3AF !important; cursor: not-allowed !important; pointer-events: none !important; }
     .btn + .btn { margin-top: 16px; }
 
-    /* ===== 创造界面 ===== */
     #page-create { padding: 0; }
     .nav-bar { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #F3F4F6; min-height: 52px; flex-shrink: 0; }
     .nav-back { background: none; border: none; font-size: 15px; color: #7C3AED; cursor: pointer; padding: 4px 8px 4px 0; display: flex; align-items: center; gap: 4px; }
@@ -59,7 +53,6 @@
     .profile-input:focus { border-color: #5B21B6; }
     @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
 
-    /* ===== 聊天界面 ===== */
     #page-chat { display: flex; flex-direction: column; }
     .chat-nav { display: flex; align-items: center; padding: 12px 16px; border-bottom: 1px solid #F3F4F6; flex-shrink: 0; }
     .chat-clear-btn { background: none; border: 1px solid #D1D5DB; border-radius: 8px; padding: 5px 10px; font-size: 12px; color: #6B7280; cursor: pointer; white-space: nowrap; }
@@ -91,7 +84,6 @@
     .send-btn .spin { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.4); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ===== 通用 ===== */
     .btn-save { background: #7C3AED; color: #fff; width: 100%; max-width: 360px; height: 52px; border: none; border-radius: 12px; font-size: 16px; font-weight: 500; cursor: pointer; margin-top: 8px; transition: opacity 0.15s; }
     .btn-save:active { opacity: 0.85; }
     .welcome-tip { text-align: center; color: #9CA3AF; font-size: 13px; padding: 16px 0; }
@@ -99,7 +91,6 @@
 </head>
 <body>
 
-<!-- ========== API设置页 ========== -->
 <div class="page hidden" id="page-setup">
   <div style="width:64px;height:64px;background:#7C3AED;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px;">
     <span style="color:#fff;font-size:26px;font-weight:bold;">健</span>
@@ -117,17 +108,13 @@
   </p>
 </div>
 
-<!-- ========== 主页 ========== -->
 <div class="page hidden" id="page-home">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
-    <div class="home-icon" onclick="goSelect()">
-      <span>健</span>
-    </div>
+    <div class="home-icon" onclick="goSelect()"><span>健</span></div>
     <p class="home-label">健康顾问</p>
   </div>
 </div>
 
-<!-- ========== 选择界面 ========== -->
 <div class="page hidden" id="page-select">
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;">
     <h2>请选择操作</h2>
@@ -137,7 +124,6 @@
   </div>
 </div>
 
-<!-- ========== 创造界面 ========== -->
 <div class="page hidden" id="page-create">
   <div class="nav-bar">
     <button class="nav-back" onclick="showPage('page-select')">← 返回</button>
@@ -149,19 +135,16 @@
     <p class="sub">您的数据仅保存在本机，不会上传</p>
     <textarea class="profile-input" id="profile-input"
       placeholder="例如：年龄28岁，身高175cm，体重70kg，有轻度高血压，对花粉过敏，日常久坐办公..."></textarea>
-    <button
-      style="width:100%;height:52px;background:#7C3AED;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;margin-top:16px;"
-      onclick="saveProfile()">确认</button>
+    <button style="width:100%;height:52px;background:#7C3AED;color:#fff;border:none;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;margin-top:16px;" onclick="saveProfile()">确认</button>
   </div>
 </div>
 
-<!-- ========== 聊天界面 ========== -->
 <div class="page hidden" id="page-chat">
   <div class="chat-nav">
     <button class="nav-back" onclick="showPage('page-select')">← 返回</button>
     <div class="nav-title">健康顾问</div>
     <div style="display:flex;gap:6px;">
-      <button class="chat-clear-btn" onclick="resetApiKey()" title="修改API Key">🔑</button>
+      <button class="chat-clear-btn" onclick="location.href='./reset.html'" title="修改API Key">🔑</button>
       <button class="chat-clear-btn" onclick="clearChat()">清除记忆</button>
     </div>
   </div>
@@ -177,258 +160,150 @@
 </div>
 
 <script>
-// ============================================================
-// 常量
-// ============================================================
-const K = {
-  API: 'deepseek_api_key',
-  PROFILE: 'health_profile',
-  HAS: 'has_profile',
-  HISTORY: 'chat_history'
-};
+const K = { API:'deepseek_api_key', PROFILE:'health_profile', HAS:'has_profile', HISTORY:'chat_history' };
 let isSending = false;
 
-// ============================================================
-// localStorage 工具
-// ============================================================
-const ls   = k => localStorage.getItem(k);
-const lsSet = (k, v) => localStorage.setItem(k, v);
+const ls    = k => localStorage.getItem(k);
+const lsSet = (k,v) => localStorage.setItem(k,v);
 const lsDel = (...ks) => ks.forEach(k => localStorage.removeItem(k));
 
-// ============================================================
-// 页面切换
-// ============================================================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
   document.getElementById(id).classList.remove('hidden');
   if (id === 'page-select') refreshSelectBtns();
-  if (id === 'page-chat')   { loadChatHistory(); setTimeout(scrollToBottom, 50); }
+  if (id === 'page-chat') { loadChatHistory(); setTimeout(scrollToBottom, 50); }
 }
 
 function refreshSelectBtns() {
   const has = ls(K.HAS) === 'true';
-  ['btn-use', 'btn-clear'].forEach(id => {
-    const el = document.getElementById(id);
-    if (has) { el.className = 'btn btn-primary'; }
-    else      { el.className = 'btn btn-disabled'; }
+  ['btn-use','btn-clear'].forEach(id => {
+    document.getElementById(id).className = 'btn ' + (has ? 'btn-primary' : 'btn-disabled');
   });
 }
 
-// ============================================================
-// 初始化
-// ============================================================
 window.addEventListener('load', () => {
-  // URL 带 ?setup 时强制打开设置页
   if (location.search.includes('setup') || !ls(K.API)) {
     showPage('page-setup');
   } else {
     showPage('page-home');
   }
-  // 注册 Service Worker
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('./service-worker.js')
-      .catch(e => console.log('SW 注册失败:', e));
+    navigator.serviceWorker.register('./service-worker.js').catch(() => {});
   }
 });
 
-// ============================================================
-// API Key 设置
-// ============================================================
 function togglePw() {
   const inp = document.getElementById('api-key-input');
   inp.type = inp.type === 'password' ? 'text' : 'password';
 }
+
 function saveApiKey() {
   const val = document.getElementById('api-key-input').value.trim();
   if (!val) { alert('请输入 API Key'); return; }
   lsSet(K.API, val);
-  // 清除 URL 里的 ?setup 参数
-  if (location.search.includes('setup')) {
-    history.replaceState(null, '', location.pathname);
-  }
+  if (location.search.includes('setup')) history.replaceState(null,'',location.pathname);
   showPage('page-home');
 }
-function resetApiKey() {
-  if (!confirm('确定要修改 API Key 吗？')) return;
-  lsDel(K.API);
-  document.getElementById('api-key-input').value = '';
-  showPage('page-setup');
-}
 
-// ============================================================
-// 导航
-// ============================================================
 function goSelect() { showPage('page-select'); }
 function goCreate()  { showPage('page-create'); }
 function goChat()    { showPage('page-chat'); }
 
-// ============================================================
-// 创造（保存身体数据）
-// ============================================================
 function saveProfile() {
   const inp = document.getElementById('profile-input');
   const val = inp.value.trim();
-  if (!val) {
-    inp.classList.add('error');
-    setTimeout(() => inp.classList.remove('error'), 600);
-    return;
-  }
+  if (!val) { inp.classList.add('error'); setTimeout(() => inp.classList.remove('error'), 600); return; }
   lsSet(K.PROFILE, val);
   lsSet(K.HAS, 'true');
   lsDel(K.HISTORY);
   showPage('page-chat');
 }
 
-// ============================================================
-// 清除全部数据
-// ============================================================
 function clearAll() {
-  if (!confirm('确定清除所有数据吗？聊天记录和身体信息将全部删除，此操作不可恢复。')) return;
   lsDel(K.PROFILE, K.HAS, K.HISTORY);
   showPage('page-select');
 }
 
-// ============================================================
-// 清除聊天记忆
-// ============================================================
 function clearChat() {
-  if (!confirm('确定清除本次对话记录吗？')) return;
   lsDel(K.HISTORY);
-  document.getElementById('chat-messages').innerHTML =
-    '<p class="welcome-tip" id="welcome-tip">您好！请输入您的健康问题</p>';
+  document.getElementById('chat-messages').innerHTML = '<p class="welcome-tip" id="welcome-tip">您好！请输入您的健康问题</p>';
 }
 
-// ============================================================
-// 聊天记录
-// ============================================================
-function getHistory() {
-  try { return JSON.parse(ls(K.HISTORY) || '[]'); } catch { return []; }
-}
+function getHistory() { try { return JSON.parse(ls(K.HISTORY)||'[]'); } catch { return []; } }
 function saveHistory(h) { lsSet(K.HISTORY, JSON.stringify(h)); }
 
 function loadChatHistory() {
-  const msgs    = document.getElementById('chat-messages');
+  const msgs = document.getElementById('chat-messages');
   const history = getHistory();
-  if (!history.length) {
-    msgs.innerHTML = '<p class="welcome-tip" id="welcome-tip">您好！请输入您的健康问题</p>';
-    return;
-  }
+  if (!history.length) { msgs.innerHTML = '<p class="welcome-tip" id="welcome-tip">您好！请输入您的健康问题</p>'; return; }
   msgs.innerHTML = '';
   history.forEach(m => appendBubble(m.role === 'user' ? 'user' : 'ai', m.content));
 }
 
-function scrollToBottom() {
-  const msgs = document.getElementById('chat-messages');
-  msgs.scrollTop = msgs.scrollHeight;
-}
+function scrollToBottom() { const m = document.getElementById('chat-messages'); m.scrollTop = m.scrollHeight; }
 
 function formatTime() {
   const d = new Date();
   return String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
 }
 
-// 简单 Markdown → HTML
 function md2html(text) {
   return text
-    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/^#{1,3} (.+)$/gm, '<strong>$1</strong>')
-    .replace(/^- (.+)$/gm, '• $1')
-    .replace(/\n\n+/g, '</p><p>')
-    .replace(/\n/g, '<br>');
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/^#{1,3} (.+)$/gm,'<strong>$1</strong>')
+    .replace(/^- (.+)$/gm,'• $1')
+    .replace(/\n\n+/g,'</p><p>')
+    .replace(/\n/g,'<br>');
 }
 
 function appendBubble(role, text) {
   const msgs = document.getElementById('chat-messages');
   const tip  = document.getElementById('welcome-tip');
   if (tip) tip.remove();
-
-  const row    = document.createElement('div');
-  row.className = 'msg-row ' + role;
-
-  const bubble = document.createElement('div');
-  bubble.className = 'msg-bubble';
-  if (role === 'ai') {
-    bubble.innerHTML = '<p>' + md2html(text) + '</p>';
-  } else {
-    bubble.textContent = text;
-  }
-
-  const time = document.createElement('div');
-  time.className   = 'msg-time';
-  time.textContent = formatTime();
-
-  row.appendChild(bubble);
-  row.appendChild(time);
-  msgs.appendChild(row);
-  scrollToBottom();
+  const row    = document.createElement('div'); row.className = 'msg-row ' + role;
+  const bubble = document.createElement('div'); bubble.className = 'msg-bubble';
+  if (role === 'ai') { bubble.innerHTML = '<p>' + md2html(text) + '</p>'; } else { bubble.textContent = text; }
+  const time = document.createElement('div'); time.className = 'msg-time'; time.textContent = formatTime();
+  row.appendChild(bubble); row.appendChild(time); msgs.appendChild(row); scrollToBottom();
   return { row, bubble };
 }
 
-// ============================================================
-// 发送消息（流式）
-// ============================================================
 async function sendMessage() {
   if (isSending) return;
   const inp  = document.getElementById('chat-input');
   const text = inp.value.trim();
   if (!text) return;
 
-  isSending = true;
-  inp.value = '';
-  inp.disabled = true;
-
+  isSending = true; inp.value = ''; inp.disabled = true;
   const sendBtn = document.getElementById('send-btn');
-  sendBtn.disabled = true;
-  sendBtn.innerHTML = '<div class="spin"></div>';
+  sendBtn.disabled = true; sendBtn.innerHTML = '<div class="spin"></div>';
 
   appendBubble('user', text);
+  const history = getHistory(); history.push({ role:'user', content:text });
 
-  const history = getHistory();
-  history.push({ role: 'user', content: text });
-
-  // 占位 AI 气泡
-  const msgs    = document.getElementById('chat-messages');
-  const tip     = document.getElementById('welcome-tip');
-  if (tip) tip.remove();
-
-  const aiRow    = document.createElement('div');
-  aiRow.className = 'msg-row ai';
-  const aiBubble = document.createElement('div');
-  aiBubble.className = 'msg-bubble';
+  const msgs = document.getElementById('chat-messages');
+  const tip  = document.getElementById('welcome-tip'); if (tip) tip.remove();
+  const aiRow = document.createElement('div'); aiRow.className = 'msg-row ai';
+  const aiBubble = document.createElement('div'); aiBubble.className = 'msg-bubble';
   aiBubble.innerHTML = '<div class="typing-dot"><span></span><span></span><span></span></div>';
-  const aiTime    = document.createElement('div');
-  aiTime.className   = 'msg-time';
-  aiTime.textContent = formatTime();
-  aiRow.appendChild(aiBubble);
-  aiRow.appendChild(aiTime);
-  msgs.appendChild(aiRow);
-  scrollToBottom();
+  const aiTime = document.createElement('div'); aiTime.className = 'msg-time'; aiTime.textContent = formatTime();
+  aiRow.appendChild(aiBubble); aiRow.appendChild(aiTime); msgs.appendChild(aiRow); scrollToBottom();
 
-  const profile      = ls(K.PROFILE) || '未提供身体数据';
+  const profile = ls(K.PROFILE) || '未提供身体数据';
   const systemPrompt = `你是一位专业的AI健康顾问，请根据用户的身体数据提供个性化健康建议。用户的身体数据如下：${profile}。请用简洁友好的中文回答，给出专业但易懂的健康建议，适当时提醒用户就医。每次回复控制在300字以内，除非用户要求详细说明。`;
-  const apiKey       = ls(K.API);
+  const apiKey = ls(K.API);
 
   try {
     const resp = await fetch('https://api.deepseek.com/v1/chat/completions', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + apiKey
-      },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [{ role: 'system', content: systemPrompt }, ...history],
-        stream: true,
-        max_tokens: 800
-      })
+      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+apiKey },
+      body: JSON.stringify({ model:'deepseek-chat', messages:[{role:'system',content:systemPrompt},...history], stream:true, max_tokens:800 })
     });
 
     if (resp.status === 401) {
-      aiBubble.innerHTML = '<p style="color:#EF4444;">API Key 无效，请重新设置</p>';
-      lsDel(K.API);
-      setTimeout(() => showPage('page-setup'), 1800);
+      aiBubble.innerHTML = '<p style="color:#EF4444;">API Key 无效，点右上角 🔑 重新设置</p>';
       throw new Error('401');
     }
     if (resp.status === 402) {
@@ -437,32 +312,21 @@ async function sendMessage() {
     }
     if (!resp.ok) throw new Error('HTTP ' + resp.status);
 
-    const reader  = resp.body.getReader();
-    const decoder = new TextDecoder('utf-8');
-    let aiText    = '';
-    aiBubble.innerHTML = '';
-
+    const reader = resp.body.getReader(); const decoder = new TextDecoder('utf-8');
+    let aiText = ''; aiBubble.innerHTML = '';
     while (true) {
-      const { value, done } = await reader.read();
-      if (done) break;
-      const lines = decoder.decode(value, { stream: true }).split('\n');
+      const { value, done } = await reader.read(); if (done) break;
+      const lines = decoder.decode(value, { stream:true }).split('\n');
       for (const line of lines) {
         if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (raw === '[DONE]') break;
+        const raw = line.slice(6).trim(); if (raw === '[DONE]') break;
         try {
           const delta = JSON.parse(raw)?.choices?.[0]?.delta?.content;
-          if (delta) {
-            aiText += delta;
-            aiBubble.innerHTML = '<p>' + md2html(aiText) + '</p>';
-            scrollToBottom();
-          }
-        } catch { /* 跳过格式异常行 */ }
+          if (delta) { aiText += delta; aiBubble.innerHTML = '<p>' + md2html(aiText) + '</p>'; scrollToBottom(); }
+        } catch {}
       }
     }
-
-    history.push({ role: 'assistant', content: aiText });
-    saveHistory(history);
+    history.push({ role:'assistant', content:aiText }); saveHistory(history);
 
   } catch (err) {
     if (!['401','402'].includes(err.message)) {
@@ -472,14 +336,12 @@ async function sendMessage() {
     }
   }
 
-  isSending            = false;
-  inp.disabled         = false;
-  sendBtn.disabled     = false;
-  sendBtn.innerHTML    = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#fff"/></svg>';
+  isSending = false; inp.disabled = false;
+  sendBtn.disabled = false;
+  sendBtn.innerHTML = '<svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" fill="#fff"/></svg>';
   inp.focus();
 }
 
-// 回车发送
 document.getElementById('chat-input').addEventListener('keydown', e => {
   if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
 });
