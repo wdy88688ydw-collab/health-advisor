@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>重置中...</title>
+  <style>
+    body { display:flex; flex-direction:column; align-items:center; justify-content:center; height:100vh; font-family:sans-serif; background:#fff; }
+    .icon { font-size:48px; margin-bottom:16px; }
+    p { color:#374151; font-size:16px; }
+    .sub { color:#9CA3AF; font-size:13px; margin-top:8px; }
+  </style>
+</head>
+<body>
+  <div class="icon">⚙️</div>
+  <p>正在重置应用...</p>
+  <p class="sub" id="status">清除缓存中</p>
+  <script>
+    async function reset() {
+      const status = document.getElementById('status');
+      if ('serviceWorker' in navigator) {
+        const regs = await navigator.serviceWorker.getRegistrations();
+        for (const reg of regs) await reg.unregister();
+      }
+      status.textContent = '清除离线缓存中';
+      if ('caches' in window) {
+        const keys = await caches.keys();
+        for (const key of keys) await caches.delete(key);
+      }
+      status.textContent = '清除本地数据中';
+      localStorage.clear();
+      status.textContent = '完成！即将跳转...';
+      setTimeout(() => { location.href = './index.html?setup'; }, 800);
+    }
+    reset();
+  </script>
+</body>
+</html>
