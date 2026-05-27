@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>图标生成工具 · 健康顾问</title>
+  <style>
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; background: #f9fafb; }
+    h1 { color: #7C3AED; margin-bottom: 8px; font-size: 22px; }
+    .desc { color: #6B7280; margin-bottom: 28px; font-size: 14px; text-align: center; line-height: 1.7; }
+    canvas { display: none; }
+    .preview { display: flex; gap: 40px; margin-bottom: 32px; flex-wrap: wrap; justify-content: center; }
+    .preview-item { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .preview-item span { font-size: 13px; color: #374151; }
+    .preview-img { border-radius: 16px; box-shadow: 0 2px 16px rgba(0,0,0,0.15); }
+    .btn-group { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px; }
+    button { background: #7C3AED; color: #fff; border: none; border-radius: 10px; padding: 12px 22px; font-size: 15px; cursor: pointer; transition: opacity 0.15s; }
+    button:hover { opacity: 0.88; }
+    .card { background: #fff; border-radius: 14px; padding: 20px 28px; max-width: 460px; width: 100%; box-shadow: 0 1px 8px rgba(0,0,0,0.08); }
+    .card h3 { color: #1F2937; margin-bottom: 12px; font-size: 16px; }
+    .card ol { color: #374151; font-size: 14px; line-height: 2.2; padding-left: 20px; }
+    .card ol strong { color: #7C3AED; }
+  </style>
+</head>
+<body>
+  <h1>健康顾问 · 图标生成工具</h1>
+  <p class="desc">在浏览器中打开此页面，点击下方按钮生成图标并下载<br>将下载的两个文件放入项目根目录即可</p>
+
+  <canvas id="c192" width="192" height="192"></canvas>
+  <canvas id="c512" width="512" height="512"></canvas>
+
+  <div class="preview" id="preview-area"></div>
+
+  <div class="btn-group">
+    <button onclick="dl(192)">下载 icon-192.png</button>
+    <button onclick="dl(512)">下载 icon-512.png</button>
+    <button onclick="dl(192); setTimeout(()=>dl(512),400)" style="background:#5B21B6;">⬇ 一键下载全部</button>
+  </div>
+
+  <div class="card">
+    <h3>操作步骤</h3>
+    <ol>
+      <li>点击「<strong>一键下载全部</strong>」</li>
+      <li>浏览器下载 <strong>icon-192.png</strong> 和 <strong>icon-512.png</strong></li>
+      <li>把这两个文件复制到项目根目录（和 index.html 放在一起）</li>
+      <li>上传到 Gitee 仓库，PWA 安装图标即生效</li>
+    </ol>
+  </div>
+
+  <script>
+    function draw(size) {
+      const canvas = document.getElementById('c' + size);
+      const ctx    = canvas.getContext('2d');
+      const r      = size / 2;
+      ctx.clearRect(0, 0, size, size);
+      // 紫色圆形背景
+      ctx.beginPath();
+      ctx.arc(r, r, r - 1, 0, Math.PI * 2);
+      ctx.fillStyle = '#7C3AED';
+      ctx.fill();
+      // 白色"健"字
+      const fs = Math.round(size * 0.36);
+      ctx.fillStyle    = '#FFFFFF';
+      ctx.font         = `bold ${fs}px "PingFang SC", "Microsoft YaHei", sans-serif`;
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('健', r, r + size * 0.02);
+      return canvas;
+    }
+
+    function dl(size) {
+      const a      = document.createElement('a');
+      a.download   = 'icon-' + size + '.png';
+      a.href       = draw(size).toDataURL('image/png');
+      a.click();
+    }
+
+    window.onload = () => {
+      const area = document.getElementById('preview-area');
+      [192, 512].forEach(size => {
+        const canvas = draw(size);
+        const img    = document.createElement('img');
+        img.src      = canvas.toDataURL('image/png');
+        const disp   = size === 192 ? 96 : 128;
+        img.width    = disp;
+        img.height   = disp;
+        img.className = 'preview-img';
+        const item   = document.createElement('div');
+        item.className = 'preview-item';
+        item.appendChild(img);
+        const lbl    = document.createElement('span');
+        lbl.textContent = size + '×' + size;
+        item.appendChild(lbl);
+        area.appendChild(item);
+      });
+    };
+  </script>
+</body>
+</html>
