@@ -160,7 +160,10 @@
   <div class="chat-nav">
     <button class="nav-back" onclick="showPage('page-select')">← 返回</button>
     <div class="nav-title">健康顾问</div>
-    <button class="chat-clear-btn" onclick="clearChat()">清除记忆</button>
+    <div style="display:flex;gap:6px;">
+      <button class="chat-clear-btn" onclick="resetApiKey()" title="修改API Key">🔑</button>
+      <button class="chat-clear-btn" onclick="clearChat()">清除记忆</button>
+    </div>
   </div>
   <div class="chat-messages" id="chat-messages">
     <p class="welcome-tip" id="welcome-tip">您好！请输入您的健康问题</p>
@@ -215,8 +218,12 @@ function refreshSelectBtns() {
 // 初始化
 // ============================================================
 window.addEventListener('load', () => {
-  if (!ls(K.API)) { showPage('page-setup'); return; }
-  showPage('page-home');
+  // URL 带 ?setup 时强制打开设置页
+  if (location.search.includes('setup') || !ls(K.API)) {
+    showPage('page-setup');
+  } else {
+    showPage('page-home');
+  }
   // 注册 Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js')
@@ -235,7 +242,17 @@ function saveApiKey() {
   const val = document.getElementById('api-key-input').value.trim();
   if (!val) { alert('请输入 API Key'); return; }
   lsSet(K.API, val);
+  // 清除 URL 里的 ?setup 参数
+  if (location.search.includes('setup')) {
+    history.replaceState(null, '', location.pathname);
+  }
   showPage('page-home');
+}
+function resetApiKey() {
+  if (!confirm('确定要修改 API Key 吗？')) return;
+  lsDel(K.API);
+  document.getElementById('api-key-input').value = '';
+  showPage('page-setup');
 }
 
 // ============================================================
